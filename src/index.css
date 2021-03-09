@@ -1,5 +1,12 @@
+/* GENERAL */
 body {
   margin: 0;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* SETTINGS */
@@ -8,9 +15,6 @@ body {
 }
 
 .buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0.4em;
 }
 
@@ -68,12 +72,6 @@ body {
   background-color: white;
 }
 
-.button.size-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .size {
   display: block;
   background-color: black;
@@ -105,6 +103,12 @@ body {
   height: 13px;
 }
 
+/* WORDCHANGER */
+.word {
+  font-size: 2em;
+  font-weight: bold;
+}
+
 /* BOARD */
 .board {
   margin: 1em;
@@ -115,4 +119,6 @@ body {
   background: #fff;
   width: 100%;
   height: auto;
+  max-height: 475px;
+  max-width: 800px;
 }

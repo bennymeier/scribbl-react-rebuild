@@ -22,13 +22,13 @@ const SizeButtons: React.FC<Props> = (props) => {
 
   return (
     <>
-      <div className="buttons">
+      <div className="buttons centered">
         {sizes.map((obj) => {
           const { size, text } = obj;
           const isSelected = size === lineSize;
           return (
             <div
-              className={`button size-btn ${text} ${
+              className={`button centered ${text} ${
                 isSelected ? 'selected' : ''
               }`}
               title={`${size}`}

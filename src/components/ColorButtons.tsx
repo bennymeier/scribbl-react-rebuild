@@ -27,7 +27,7 @@ const ColorButtons: React.FC<Props> = (props) => {
 
   return (
     <>
-      <div className="buttons">
+      <div className="buttons centered">
         {colors.map((color) => {
           const isSelected = color === lineColor;
           return (

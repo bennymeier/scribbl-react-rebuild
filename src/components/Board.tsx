@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import ColorButtons from './ColorButtons';
 import SizeButtons from './SizeButtons';
+import WordChanger from './WordChanger';
 
 const Board = () => {
   const canvas = React.createRef<HTMLCanvasElement>();
@@ -113,11 +114,14 @@ const Board = () => {
       <section className="settings">
         <ColorButtons onChange={changeColor} />
         <SizeButtons onChange={changeSize} />
-        <div className="buttons">
+        <div className="buttons centered">
           <button onClick={resetCanvas}>Reset</button>
         </div>
       </section>
-      <section className="board">
+      <section className="wordchanger centered">
+        <WordChanger />
+      </section>
+      <section className="board centered">
         <canvas className="canvas" ref={canvas} width="800" height="800">
           Your browser does not support the canvas element.
         </canvas>
