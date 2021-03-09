@@ -8,6 +8,8 @@
 
 - Add smoother draw line
 - Add words
+- Add countdown
+- Add points/highscore
 - Add players
 - Add "chat" to guess the searched word
 - Add right typings to events (TypeScript)
