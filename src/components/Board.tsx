@@ -5,12 +5,6 @@ import SizeButtons from './SizeButtons';
 const Board = () => {
   const canvas = React.createRef<HTMLCanvasElement>();
 
-  useEffect(() => {
-    initialize();
-    addEvents();
-    return () => removeEvents();
-  }, []);
-
   const initialize = () => {
     if (canvas?.current) {
       canvas.current.width = 800;
@@ -68,6 +62,13 @@ const Board = () => {
   const removeEvents = () => {
     canvas?.current?.removeEventListener('mousedown', mousedownEvent);
   };
+
+  useEffect(() => {
+    initialize();
+    addEvents();
+    return () => removeEvents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const getMousePosition = (event: any) => {
     const rect = canvas?.current?.getBoundingClientRect();
