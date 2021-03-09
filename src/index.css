@@ -1,3 +1,73 @@
+body {
+  margin: 0;
+}
+
+/* SETTINGS */
+.settings {
+  margin: 1em;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  border: 1px solid black;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  margin: 0.1em;
+}
+
+.button.black {
+  background-color: black;
+}
+
+.button.gray {
+  background-color: gray;
+}
+
+.button.red {
+  background-color: red;
+}
+
+.button.orange {
+  background-color: orange;
+}
+
+.button.blue {
+  background-color: blue;
+}
+
+.button.blueviolet {
+  background-color: blueviolet;
+}
+
+.button.brown {
+  background-color: brown;
+}
+
+.button.yellow {
+  background-color: yellow;
+}
+
+.button.green {
+  background-color: green;
+}
+
+.button.white {
+  background-color: white;
+}
+
+/* BOARD */
+.board {
+  margin: 1em;
+}
+
 .canvas {
   border: 3px solid black;
+  background: #fff;
+  width: 100%;
+  height: auto;
 }

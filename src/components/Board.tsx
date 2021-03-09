@@ -1,28 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import ColorButtons from './ColorButtons';
 
 const Board = () => {
   const canvas = React.createRef<HTMLCanvasElement>();
+
   useEffect(() => {
+    initialize();
     addEvents();
     return () => removeEvents();
   }, []);
+
+  const initialize = () => {
+    if (canvas?.current) {
+      canvas.current.width = 800;
+      canvas.current.height = 600;
+    }
+  };
+
+  const changeColor = (selectedColor: string) => {
+    if (canvas?.current) {
+      const ctx = canvas?.current?.getContext('2d');
+      if (ctx) {
+        ctx.strokeStyle = selectedColor;
+      }
+    }
+  };
 
   const mousedownEvent = (event: any) => {
     const { x, y } = getMousePosition(event);
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
-      ctx.beginPath();
       ctx.moveTo(x, y);
+      ctx.lineTo(x, y); // need it?
       event.preventDefault();
       canvas?.current?.addEventListener('mousemove', mouseMove, false);
     }
   };
 
   const addEvents = () => {
-    canvas?.current?.addEventListener('mousedown', mousedownEvent, false);
-    canvas?.current?.addEventListener('mouseup', () =>
-      canvas?.current?.removeEventListener('mousemove', mouseMove, false)
-    );
+    if (canvas?.current) {
+      canvas.current.addEventListener('mousedown', mousedownEvent, false);
+      canvas.current.addEventListener('mouseup', () => {
+        const ctx = canvas?.current?.getContext('2d');
+        if (ctx) {
+          ctx.beginPath();
+        }
+        canvas.current?.removeEventListener('mousemove', mouseMove, false);
+      });
+    }
   };
 
   const removeEvents = () => {
@@ -31,10 +56,22 @@ const Board = () => {
 
   const getMousePosition = (event: any) => {
     const rect = canvas?.current?.getBoundingClientRect();
-    if (rect) {
-      return { x: event.clientX - rect.left, y: event.clientY - rect.top };
+    let x = 0;
+    let y = 0;
+    if (rect && canvas?.current) {
+      // Thanks to https://stackoverflow.com/a/43873988
+      x = event.pageX - rect.left - window.scrollX;
+      x /= rect.width;
+      y = event.pageY - rect.top - window.scrollY;
+      y /= rect.height;
+      x *= canvas.current.width;
+      y *= canvas.current.height;
+      return {
+        x,
+        y,
+      };
     }
-    return { x: 0, y: 0 };
+    return { x, y };
   };
 
   const mouseMove = (evt: any) => {
@@ -46,12 +83,23 @@ const Board = () => {
     }
   };
 
+  const resetCanvas = () => {
+    const ctx = canvas?.current?.getContext('2d');
+    if (ctx && canvas?.current) {
+      ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
+    }
+  };
+
   return (
     <>
+      <section className="settings">
+        <ColorButtons onChange={changeColor} />
+      </section>
       <section className="board">
-        <canvas className="canvas" ref={canvas} width="800" height="600">
+        <canvas className="canvas" ref={canvas} width="800" height="800">
           Your browser does not support the canvas element.
         </canvas>
+        <button onClick={resetCanvas}>Reset</button>
       </section>
     </>
   );
