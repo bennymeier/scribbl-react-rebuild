@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const sizes = [
   { text: 'one', size: 1 },
   { text: 'three', size: 3 },
@@ -11,17 +13,24 @@ interface Props {
 }
 const SizeButtons: React.FC<Props> = (props) => {
   const { onChange } = props;
+  const [lineSize, setSize] = useState(3);
+
   const handleChange = (selectedSize: number) => {
     onChange(selectedSize);
+    setSize(selectedSize);
   };
+
   return (
     <>
       <div className="buttons">
         {sizes.map((obj) => {
           const { size, text } = obj;
+          const isSelected = size === lineSize;
           return (
             <div
-              className={`button size-btn ${text}`}
+              className={`button size-btn ${text} ${
+                isSelected ? 'selected' : ''
+              }`}
               title={`${size}`}
               key={text}
               onClick={() => handleChange(size)}

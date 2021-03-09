@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const colors = [
   'white',
   'black',
@@ -16,18 +18,21 @@ interface Props {
 }
 const ColorButtons: React.FC<Props> = (props) => {
   const { onChange } = props;
+  const [lineColor, setColor] = useState('black');
 
   const handleChange = (selectedColor: string) => {
     onChange(selectedColor);
+    setColor(selectedColor);
   };
 
   return (
     <>
       <div className="buttons">
         {colors.map((color) => {
+          const isSelected = color === lineColor;
           return (
             <div
-              className={`button ${color}`}
+              className={`button ${color} ${isSelected ? 'selected' : ''}`}
               title={color}
               key={color}
               onClick={() => handleChange(color)}
