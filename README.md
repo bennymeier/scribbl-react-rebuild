@@ -6,6 +6,7 @@
 
 ## Todos
 
+- Add smoother draw line
 - Add words
 - Add players
 - Add "chat" to guess the searched word
