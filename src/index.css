@@ -60,6 +60,43 @@ body {
   background-color: white;
 }
 
+.button.size-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.size {
+  display: block;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.size.one {
+  width: 3px;
+  height: 3px;
+}
+
+.size.three {
+  width: 6px;
+  height: 6px;
+}
+
+.size.five {
+  width: 9px;
+  height: 9px;
+}
+
+.size.seven {
+  width: 11px;
+  height: 11px;
+}
+
+.size.nine {
+  width: 13px;
+  height: 13px;
+}
+
 /* BOARD */
 .board {
   margin: 1em;

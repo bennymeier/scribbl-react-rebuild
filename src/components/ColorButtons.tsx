@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const colors = [
   'white',
   'black',
@@ -18,10 +16,8 @@ interface Props {
 }
 const ColorButtons: React.FC<Props> = (props) => {
   const { onChange } = props;
-  const [color, setColor] = useState('black');
 
   const handleChange = (selectedColor: string) => {
-    setColor(selectedColor);
     onChange(selectedColor);
   };
 

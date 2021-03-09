@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ColorButtons from './ColorButtons';
+import SizeButtons from './SizeButtons';
 
 const Board = () => {
   const canvas = React.createRef<HTMLCanvasElement>();
@@ -14,6 +15,11 @@ const Board = () => {
     if (canvas?.current) {
       canvas.current.width = 800;
       canvas.current.height = 600;
+      const ctx = canvas?.current?.getContext('2d');
+      if (ctx) {
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+      }
     }
   };
 
@@ -22,6 +28,15 @@ const Board = () => {
       const ctx = canvas?.current?.getContext('2d');
       if (ctx) {
         ctx.strokeStyle = selectedColor;
+      }
+    }
+  };
+
+  const changeSize = (selectedSize: number) => {
+    if (canvas?.current) {
+      const ctx = canvas?.current?.getContext('2d');
+      if (ctx) {
+        ctx.lineWidth = selectedSize;
       }
     }
   };
@@ -79,6 +94,8 @@ const Board = () => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
       ctx.lineTo(x, y);
+      ctx.moveTo(x, y);
+      //   ctx.arc(x, y, 3, 50, 2 * Math.PI);
       ctx.stroke();
     }
   };
@@ -94,12 +111,15 @@ const Board = () => {
     <>
       <section className="settings">
         <ColorButtons onChange={changeColor} />
+        <SizeButtons onChange={changeSize} />
+        <div className="buttons">
+          <button onClick={resetCanvas}>Reset</button>
+        </div>
       </section>
       <section className="board">
         <canvas className="canvas" ref={canvas} width="800" height="800">
           Your browser does not support the canvas element.
         </canvas>
-        <button onClick={resetCanvas}>Reset</button>
       </section>
     </>
   );
